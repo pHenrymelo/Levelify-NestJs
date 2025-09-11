@@ -30,6 +30,14 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-	"email": "kaiser@kaiserinc.com.br",
-	"password": "12345678"
+	"title": "The architect masterpiece 2",
+	"goal": "Create a gamified system for habbit tracking and self inprovment"
 }
+
+###
+
+# @name fetch_quests
+GET {{baseUrl}}/quests?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+

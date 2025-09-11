@@ -32,6 +32,7 @@ model Quest {
   goal      String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
+  dueDate   DateTime  @default(dbgenerated("now() + interval '24 hours'"))
   playerId  String    @map("author_id")
 
   player User @relation(fields: [playerId], references: [id])
