@@ -30,7 +30,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-	"title": "The architect masterpiece 2",
+	"title": "The architect masterpiece",
 	"goal": "Create a gamified system for habbit tracking and self inprovment"
 }
 
