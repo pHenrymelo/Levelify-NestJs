@@ -16,6 +16,7 @@ CREATE TABLE "public"."quests" (
     "goal" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3),
+    "dueDate" TIMESTAMP(3) NOT NULL DEFAULT now() + interval '24 hours',
     "author_id" TEXT NOT NULL,
 
     CONSTRAINT "quests_pkey" PRIMARY KEY ("id")
