@@ -1,11 +1,11 @@
 import type { PaginationParams } from '@/core/repositories/pagination-params';
 import type { Quest } from '../../enterprise/entities/quest';
 
-export interface QuestsRepository {
-	findById(id: string): Promise<Quest | null>;
-	findBySlug(slug: string): Promise<Quest | null>;
-	findManyPriority(params: PaginationParams): Promise<Quest[]>;
-	create(quest: Quest): Promise<void>;
-	delete(quest: Quest): Promise<void>;
-	save(quest: Quest): Promise<void>;
+export abstract class QuestsRepository {
+	abstract findById(id: string): Promise<Quest | null>;
+	abstract findBySlug(slug: string): Promise<Quest | null>;
+	abstract findManyPriority(params: PaginationParams): Promise<Quest[]>;
+	abstract create(quest: Quest): Promise<void>;
+	abstract delete(quest: Quest): Promise<void>;
+	abstract save(quest: Quest): Promise<void>;
 }

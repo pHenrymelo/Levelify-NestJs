@@ -1,9 +1,10 @@
 import { type Either, right } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { Injectable } from '@nestjs/common';
 import { Quest } from '../../enterprise/entities/quest';
 import { QuestReward } from '../../enterprise/entities/quest-reward';
 import { QuestRewardList } from '../../enterprise/entities/quest-reward-list';
-import type { QuestsRepository } from '../repositories/quests-repository';
+import { QuestsRepository } from '../repositories/quests-repository';
 
 interface CreateQuestUseCaseRequest {
 	title: string;
@@ -19,6 +20,7 @@ type CreateQuestUseCaseResponse = Either<
 	}
 >;
 
+@Injectable()
 export class CreateQuestUseCase {
 	constructor(private questsRepository: QuestsRepository) {}
 

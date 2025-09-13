@@ -1,3 +1,4 @@
+import { QuestsRepository } from '@/domain/habbitTracker/application/repositories/quests-repository';
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaGoalRewardsRepository } from './prisma/repositories/prisma-goal-rewards-repository';
@@ -10,7 +11,10 @@ import { PrismaRewardsRepository } from './prisma/repositories/prisma-rewards-re
 @Module({
 	providers: [
 		PrismaService,
-		PrismaQuestsRepository,
+		{
+			provide: QuestsRepository,
+			useClass: PrismaQuestsRepository,
+		},
 		PrismaQuestRewards,
 		PrismaRewardsRepository,
 		PrismaGoalsRepository,
@@ -19,7 +23,7 @@ import { PrismaRewardsRepository } from './prisma/repositories/prisma-rewards-re
 	],
 	exports: [
 		PrismaService,
-		PrismaQuestsRepository,
+		QuestsRepository,
 		PrismaQuestRewards,
 		PrismaRewardsRepository,
 		PrismaGoalsRepository,
