@@ -1,9 +1,9 @@
+import { AppModule } from '@/infra/app.module';
+import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import type { INestApplication } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
-import { AppModule } from '@/infra/app.module';
-import { PrismaService } from '@/infra/prisma/prisma.service';
 
 describe('Create account (e2e) tests', () => {
 	let app: INestApplication;
@@ -38,7 +38,7 @@ describe('Create account (e2e) tests', () => {
 			.set('Authorization', `Bearer ${accessToken}`)
 			.send({
 				title: 'the test quest',
-				goal: 'test quest goal',
+				description: 'test quest description',
 			});
 
 		expect(response.statusCode).toBe(201);

@@ -1,14 +1,14 @@
+import { CurrentUser } from '@/infra/auth/current-user.decorator';
+import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
+import type { UserPayload } from '@/infra/auth/jwt.strategy';
+import { PrismaService } from '@/infra/database/prisma/prisma.service';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import z from 'zod';
-import { CurrentUser } from '@/infra/auth/current-user.decorator';
-import type { UserPayload } from '@/infra/auth/jwt.strategy';
-import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
-import { PrismaService } from '@/infra/prisma/prisma.service';
 
 const createQuestBodySchema = z.object({
 	title: z.string(),
-	goal: z.string(),
+	description: z.string(),
 });
 
 type CreateQuestBodySchema = z.infer<typeof createQuestBodySchema>;
@@ -25,7 +25,7 @@ export class CreateQuestController {
 		@Body(bodyValidationPipe) body: CreateQuestBodySchema,
 		@CurrentUser() user: UserPayload,
 	) {
-		const { title, goal } = body;
+		const { title, description } = body;
 
 		const userId = user.sub;
 
@@ -33,7 +33,7 @@ export class CreateQuestController {
 			data: {
 				playerId: userId,
 				title,
-				goal,
+				description,
 				slug: this.convertToSlug(title),
 			},
 		});

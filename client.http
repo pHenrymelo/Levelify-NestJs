@@ -31,7 +31,7 @@ Authorization: Bearer {{authToken}}
 
 {
 	"title": "The architect masterpiece",
-	"goal": "Create a gamified system for habbit tracking and self inprovment"
+	"description": "Create a gamified system for habbit tracking and self inprovment"
 }
 
 ###

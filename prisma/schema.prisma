@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -25,16 +19,29 @@ model User {
 }
 
 model Quest {
-  id        String    @id @default(uuid())
-  title     String
-  slug      String    @unique
-  goal      String
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  dueDate   DateTime  @default(dbgenerated("now() + interval '24 hours'"))
-  playerId  String    @map("author_id")
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  completed   Boolean   @default(false)
+  slug        String    @unique
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  dueDate     DateTime  @default(dbgenerated("now() + interval '24 hours'"))
+  playerId    String    @map("author_id")
 
-  player User @relation(fields: [playerId], references: [id])
+  player User   @relation(fields: [playerId], references: [id])
+  goals  Goal[]
 
   @@map("quests")
+}
+
+model Goal {
+  id        String  @id @default(uuid())
+  statement String
+  completed Boolean @default(false)
+  questId   String  @map("quest_id")
+
+  quest Quest @relation(fields: [questId], references: [id])
+
+  @@map("goals")
 }

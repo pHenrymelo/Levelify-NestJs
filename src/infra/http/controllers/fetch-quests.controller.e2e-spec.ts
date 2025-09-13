@@ -1,9 +1,9 @@
+import { AppModule } from '@/infra/app.module';
+import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import type { INestApplication } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
-import { AppModule } from '@/infra/app.module';
-import { PrismaService } from '@/infra/prisma/prisma.service';
 
 describe('Fetch quests (e2e) tests', () => {
 	let app: INestApplication;
@@ -38,19 +38,19 @@ describe('Fetch quests (e2e) tests', () => {
 				{
 					title: 'quest-1',
 					slug: 'quest-1',
-					goal: 'goal-1',
+					description: 'description-1',
 					playerId: user.id,
 				},
 				{
 					title: 'quest-2',
 					slug: 'quest-2',
-					goal: 'goal-2',
+					description: 'description-2',
 					playerId: user.id,
 				},
 				{
 					title: 'quest-3',
 					slug: 'quest-3',
-					goal: 'goal-3',
+					description: 'description-3',
 					playerId: user.id,
 				},
 			],
