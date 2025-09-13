@@ -11,3 +11,12 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./data/pg:/data/postgres
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    ports:
+      - "16686:16686" #UI
+      - "6831:6831/udp" #UDP traces
+      - "14268:14268" #HTTP traces
+      - "4317:4317" #OTLP/gRPC
+      - "4318:4318" #OTLP/HTTP

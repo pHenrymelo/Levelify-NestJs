@@ -1,3 +1,5 @@
+import '@opentelemetry/auto-instrumentations-node/register';
+
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
