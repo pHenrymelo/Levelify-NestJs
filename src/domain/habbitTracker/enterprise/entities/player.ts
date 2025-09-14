@@ -2,7 +2,7 @@ import { Entity } from '@/core/entities/entity';
 import type { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import type { Optional } from '@/core/types/optional';
 
-interface PlayerProps {
+export interface PlayerProps {
 	name: string;
 	email: string;
 	password: string;
@@ -14,7 +14,7 @@ interface PlayerProps {
 export class Player extends Entity<PlayerProps> {
 	static create(
 		props: Optional<PlayerProps, 'level' | 'title' | 'job'>,
-		id: UniqueEntityID,
+		id?: UniqueEntityID,
 	) {
 		const player = new Player(
 			{
