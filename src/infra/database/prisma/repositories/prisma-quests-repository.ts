@@ -1,7 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import type { PaginationParams } from '@/core/repositories/pagination-params';
 import type { QuestsRepository } from '@/domain/habbitTracker/application/repositories/quests-repository';
 import type { Quest } from '@/domain/habbitTracker/enterprise/entities/quest';
-import { Injectable } from '@nestjs/common';
 import { PrismaQuestMapper } from '../mappers/prisma-quest-mapper';
 import { PrismaService } from '../prisma.service';
 

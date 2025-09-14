@@ -1,7 +1,7 @@
+import dayjs from 'dayjs';
 import { AggregateRoot } from '@/core/entities/aggregate-root';
 import type { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import type { Optional } from '@/core/types/optional';
-import dayjs from 'dayjs';
 import { PriorityQuestEvent } from '../events/priority-quest-event';
 import { QuestRewardList } from './quest-reward-list';
 import { Slug } from './value-objects/slug';

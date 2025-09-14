@@ -1,7 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import type { PaginationParams } from '@/core/repositories/pagination-params';
 import type { GoalsRepository } from '@/domain/habbitTracker/application/repositories/goals-repository';
 import type { Goal } from '@/domain/habbitTracker/enterprise/entities/goal';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PrismaGoalsRepository implements GoalsRepository {

@@ -1,7 +1,7 @@
+import type { Prisma, Quest as PrismaQuest } from '@prisma/client';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Quest } from '@/domain/habbitTracker/enterprise/entities/quest';
 import { Slug } from '@/domain/habbitTracker/enterprise/entities/value-objects/slug';
-import type { Prisma, Quest as PrismaQuest } from '@prisma/client';
 
 export class PrismaQuestMapper {
 	static toDomain(raw: PrismaQuest): Quest {

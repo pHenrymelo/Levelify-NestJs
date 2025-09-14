@@ -1,6 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import type { QuestRewardsRepository } from '@/domain/habbitTracker/application/repositories/quest-rewards-repository';
 import type { QuestReward } from '@/domain/habbitTracker/enterprise/entities/quest-reward';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PrismaQuestRewards implements QuestRewardsRepository {

@@ -1,5 +1,6 @@
-import { CreateQuestUseCase } from '@/domain/habbitTracker/application/use-cases/create-quest';
 import { Module } from '@nestjs/common';
+import { CreateQuestUseCase } from '@/domain/habbitTracker/application/use-cases/create-quest';
+import { FetchPriorityQuestsUseCase } from '@/domain/habbitTracker/application/use-cases/fetch-priority-quests';
 import { DatabaseModule } from '../database/database.module';
 import { AuthenticateController } from './controllers/authenticate.controller';
 import { CreateAccountController } from './controllers/create-account.controller';
@@ -14,6 +15,6 @@ import { FetchPriorityQuestsController } from './controllers/fetch-quests.contro
 		CreateQuestController,
 		FetchPriorityQuestsController,
 	],
-	providers: [CreateQuestUseCase],
+	providers: [CreateQuestUseCase, FetchPriorityQuestsUseCase],
 })
 export class HttpModule {}

@@ -1,8 +1,9 @@
-import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import z from 'zod';
+import { FetchPriorityQuestsUseCase } from '@/domain/habbitTracker/application/use-cases/fetch-priority-quests';
+import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { QuestPresenter } from '../presenters/quest-presenter';
 
 const pageQueryParamSchema = z
 	.string()
@@ -18,20 +19,20 @@ const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema);
 @Controller('/quests')
 @UseGuards(JwtAuthGuard)
 export class FetchPriorityQuestsController {
-	constructor(private prisma: PrismaService) {}
+	constructor(private fetchQuests: FetchPriorityQuestsUseCase) {}
 
 	@Get()
 	async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
-		const quests = await this.prisma.quest.findMany({
-			take: 20,
-			skip: (page - 1) * 20,
-			orderBy: {
-				dueDate: 'asc',
-			},
-		});
+		const result = await this.fetchQuests.execute({ page });
+
+		if (result.isLeft()) {
+			throw new Error();
+		}
+
+		const quests = result.value.quests;
 
 		return {
-			quests,
+			quests: quests.map(QuestPresenter.toHTTP),
 		};
 	}
 }

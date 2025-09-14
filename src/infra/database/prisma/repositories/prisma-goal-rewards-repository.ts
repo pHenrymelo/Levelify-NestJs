@@ -1,6 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import type { GoalRewardsRepository } from '@/domain/habbitTracker/application/repositories/goal-rewards-repository';
 import type { GoalReward } from '@/domain/habbitTracker/enterprise/entities/goal-reward';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PrismaGoalRewardsRepository implements GoalRewardsRepository {
