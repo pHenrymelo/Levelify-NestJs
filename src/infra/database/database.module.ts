@@ -1,6 +1,6 @@
+import { Module } from '@nestjs/common';
 import { PlayersRepository } from '@/domain/habbitTracker/application/repositories/players-repository';
 import { QuestsRepository } from '@/domain/habbitTracker/application/repositories/quests-repository';
-import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaGoalRewardsRepository } from './prisma/repositories/prisma-goal-rewards-repository';
 import { PrismaGoalsRepository } from './prisma/repositories/prisma-goals-repository';

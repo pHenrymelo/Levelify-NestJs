@@ -1,6 +1,6 @@
+import { compare, hash } from 'bcryptjs';
 import { HashComparator } from '@/domain/habbitTracker/application/criptography/hash-comparator';
 import { HashGenerator } from '@/domain/habbitTracker/application/criptography/hash-generator';
-import { compare, hash } from 'bcryptjs';
 
 export class BcryptHasher implements HashGenerator, HashComparator {
 	private HASH_SALT_LENGHT = 8;

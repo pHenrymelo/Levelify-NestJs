@@ -1,6 +1,3 @@
-import { AuthenticatePlayerUseCase } from '@/domain/habbitTracker/application/use-cases/authenticate-player';
-import { InvalidCredentialsError } from '@/domain/habbitTracker/application/use-cases/errors/invalid-credentials-error';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 import {
 	BadRequestException,
 	Body,
@@ -10,6 +7,10 @@ import {
 	UsePipes,
 } from '@nestjs/common';
 import z from 'zod';
+import { AuthenticatePlayerUseCase } from '@/domain/habbitTracker/application/use-cases/authenticate-player';
+import { InvalidCredentialsError } from '@/domain/habbitTracker/application/use-cases/errors/invalid-credentials-error';
+import { Public } from '@/infra/auth/public';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 
 const authenticateBodySchema = z.object({
 	email: z.email(),
@@ -19,6 +20,7 @@ const authenticateBodySchema = z.object({
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>;
 
 @Controller('/sessions')
+@Public()
 export class AuthenticateController {
 	constructor(private authenticatePlayer: AuthenticatePlayerUseCase) {}
 

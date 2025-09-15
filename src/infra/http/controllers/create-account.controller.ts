@@ -1,6 +1,3 @@
-import { PlayerAlreadyExistsError } from '@/domain/habbitTracker/application/use-cases/errors/player-already-exists-error';
-import { RegisterPlayerUseCase } from '@/domain/habbitTracker/application/use-cases/register-player';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 import {
 	BadRequestException,
 	Body,
@@ -11,6 +8,10 @@ import {
 	UsePipes,
 } from '@nestjs/common';
 import z from 'zod';
+import { PlayerAlreadyExistsError } from '@/domain/habbitTracker/application/use-cases/errors/player-already-exists-error';
+import { RegisterPlayerUseCase } from '@/domain/habbitTracker/application/use-cases/register-player';
+import { Public } from '@/infra/auth/public';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 
 const createAccountBodySchema = z.object({
 	name: z.string(),
@@ -21,6 +22,7 @@ const createAccountBodySchema = z.object({
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>;
 
 @Controller('/accounts')
+@Public()
 export class CreateAccountController {
 	constructor(private registerPlayer: RegisterPlayerUseCase) {}
 

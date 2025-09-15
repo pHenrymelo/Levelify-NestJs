@@ -1,5 +1,5 @@
-import { type Either, left, right } from '@/core/either';
 import { Injectable } from '@nestjs/common';
+import { type Either, left, right } from '@/core/either';
 import { Player } from '../../enterprise/entities/player';
 import { HashGenerator } from '../criptography/hash-generator';
 import { PlayersRepository } from '../repositories/players-repository';

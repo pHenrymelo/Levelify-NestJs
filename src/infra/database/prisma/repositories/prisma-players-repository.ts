@@ -1,6 +1,6 @@
+import { Injectable } from '@nestjs/common';
 import type { PlayersRepository } from '@/domain/habbitTracker/application/repositories/players-repository';
 import type { Player } from '@/domain/habbitTracker/enterprise/entities/player';
-import { Injectable } from '@nestjs/common';
 import { PrismaPlayerMapper } from '../mappers/prisma-player-mapper';
 import { PrismaService } from '../prisma.service';
 

@@ -1,6 +1,6 @@
+import type { Prisma, User as PrismaUser } from '@prisma/client';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Player } from '@/domain/habbitTracker/enterprise/entities/player';
-import type { Prisma, User as PrismaUser } from '@prisma/client';
 
 export class PrismaPlayerMapper {
 	static toDomain(raw: PrismaUser): Player {

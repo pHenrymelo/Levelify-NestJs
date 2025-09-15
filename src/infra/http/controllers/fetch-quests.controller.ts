@@ -1,14 +1,7 @@
-import { FetchPriorityQuestsUseCase } from '@/domain/habbitTracker/application/use-cases/fetch-priority-quests';
-import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
-import {
-	BadRequestException,
-	Controller,
-	Get,
-	Query,
-	UseGuards,
-} from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import z from 'zod';
+import { FetchPriorityQuestsUseCase } from '@/domain/habbitTracker/application/use-cases/fetch-priority-quests';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 import { QuestPresenter } from '../presenters/quest-presenter';
 
 const pageQueryParamSchema = z
@@ -23,7 +16,6 @@ type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema);
 
 @Controller('/quests')
-@UseGuards(JwtAuthGuard)
 export class FetchPriorityQuestsController {
 	constructor(private fetchQuests: FetchPriorityQuestsUseCase) {}
 
