@@ -1,7 +1,7 @@
 import { type Either, left, right } from '@/core/either';
 import { Injectable } from '@nestjs/common';
-import type { Encrypter } from '../criptography/encrypter';
-import type { HashComparator } from '../criptography/hash-comparator';
+import { Encrypter } from '../criptography/encrypter';
+import { HashComparator } from '../criptography/hash-comparator';
 import { PlayersRepository } from '../repositories/players-repository';
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
 

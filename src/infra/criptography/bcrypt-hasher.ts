@@ -1,5 +1,5 @@
-import type { HashComparator } from '@/domain/habbitTracker/application/criptography/hash-comparator';
-import type { HashGenerator } from '@/domain/habbitTracker/application/criptography/hash-generator';
+import { HashComparator } from '@/domain/habbitTracker/application/criptography/hash-comparator';
+import { HashGenerator } from '@/domain/habbitTracker/application/criptography/hash-generator';
 import { compare, hash } from 'bcryptjs';
 
 export class BcryptHasher implements HashGenerator, HashComparator {

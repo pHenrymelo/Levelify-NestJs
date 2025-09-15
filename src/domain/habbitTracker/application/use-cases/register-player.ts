@@ -1,7 +1,7 @@
 import { type Either, left, right } from '@/core/either';
 import { Injectable } from '@nestjs/common';
 import { Player } from '../../enterprise/entities/player';
-import type { HashGenerator } from '../criptography/hash-generator';
+import { HashGenerator } from '../criptography/hash-generator';
 import { PlayersRepository } from '../repositories/players-repository';
 import { PlayerAlreadyExistsError } from './errors/player-already-exists-error';
 
