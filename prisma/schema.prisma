@@ -29,8 +29,9 @@ model Quest {
   dueDate     DateTime  @default(dbgenerated("now() + interval '24 hours'"))
   playerId    String    @map("author_id")
 
-  player User   @relation(fields: [playerId], references: [id])
-  goals  Goal[]
+  player  User     @relation(fields: [playerId], references: [id])
+  goals   Goal[]
+  rewards Reward[]
 
   @@map("quests")
 }
@@ -41,7 +42,27 @@ model Goal {
   completed Boolean @default(false)
   questId   String  @map("quest_id")
 
-  quest Quest @relation(fields: [questId], references: [id])
+  quest   Quest    @relation(fields: [questId], references: [id])
+  rewards Reward[]
 
   @@map("goals")
+}
+
+enum RewardTypes {
+  XP
+  GOLD
+  ITEM
+}
+
+model Reward {
+  id      String      @id @default(uuid())
+  type    RewardTypes @default(XP)
+  amount  Int         @default(0)
+  questId String?     @map("quest_id")
+  goalId  String?     @map("goal_id")
+
+  quest Quest? @relation(fields: [questId], references: [id])
+  goal  Goal?  @relation(fields: [goalId], references: [id])
+
+  @@map("rewards")
 }
