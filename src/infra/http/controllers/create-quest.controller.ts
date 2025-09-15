@@ -1,10 +1,16 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import z from 'zod';
 import { CreateQuestUseCase } from '@/domain/habbitTracker/application/use-cases/create-quest';
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
-import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
+import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import {
+	BadRequestException,
+	Body,
+	Controller,
+	Post,
+	UseGuards,
+} from '@nestjs/common';
+import z from 'zod';
 
 const createQuestBodySchema = z.object({
 	title: z.string(),
@@ -28,11 +34,15 @@ export class CreateQuestController {
 		const { title, description } = body;
 		const userId = user.sub;
 
-		await this.createQuest.execute({
+		const result = await this.createQuest.execute({
 			title,
 			description,
 			playerId: userId,
 			rewardIds: [],
 		});
+
+		if (result.isLeft()) {
+			throw new BadRequestException();
+		}
 	}
 }

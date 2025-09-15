@@ -1,8 +1,14 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import z from 'zod';
 import { FetchPriorityQuestsUseCase } from '@/domain/habbitTracker/application/use-cases/fetch-priority-quests';
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import {
+	BadRequestException,
+	Controller,
+	Get,
+	Query,
+	UseGuards,
+} from '@nestjs/common';
+import z from 'zod';
 import { QuestPresenter } from '../presenters/quest-presenter';
 
 const pageQueryParamSchema = z
@@ -26,7 +32,7 @@ export class FetchPriorityQuestsController {
 		const result = await this.fetchQuests.execute({ page });
 
 		if (result.isLeft()) {
-			throw new Error();
+			throw new BadRequestException();
 		}
 
 		const quests = result.value.quests;

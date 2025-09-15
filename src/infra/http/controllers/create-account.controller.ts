@@ -1,6 +1,15 @@
+import { PlayerAlreadyExistsError } from '@/domain/habbitTracker/application/use-cases/errors/player-already-exists-error';
 import { RegisterPlayerUseCase } from '@/domain/habbitTracker/application/use-cases/register-player';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
-import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common';
+import {
+	BadRequestException,
+	Body,
+	ConflictException,
+	Controller,
+	HttpCode,
+	Post,
+	UsePipes,
+} from '@nestjs/common';
 import z from 'zod';
 
 const createAccountBodySchema = z.object({
@@ -28,7 +37,14 @@ export class CreateAccountController {
 		});
 
 		if (result.isLeft()) {
-			throw new Error();
+			const error = result.value;
+
+			switch (error.constructor) {
+				case PlayerAlreadyExistsError:
+					throw new ConflictException(error.message);
+				default:
+					throw new BadRequestException(error.message);
+			}
 		}
 	}
 }
